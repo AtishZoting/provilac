@@ -1,16 +1,17 @@
 package com.provilac.stepDefination;
 
-import static org.testng.Assert.assertEquals;
 
 import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.Alert;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
+import com.provilac.pages.CartPage;
 import com.provilac.pages.HomePage;
+import com.provilac.pages.ModifyPage;
 import com.provilac.pages.OtpPage;
+import com.provilac.pages.ProductPage;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -21,6 +22,9 @@ import io.cucumber.java.en.When;
 public class TestCaseStepDefination {
 	HomePage hp = new HomePage();
 	OtpPage ot = new OtpPage();
+	ProductPage prod = new ProductPage();
+	ModifyPage mod= new ModifyPage();
+	CartPage cpage= new CartPage();
 
 	@Given("User select city Pune")
 	public void user_select_city_Pune() throws InterruptedException {
@@ -50,7 +54,7 @@ public class TestCaseStepDefination {
 	@Then("User enter mobile number {string}")
 	public void user_enter_mobile_number(String mobnumber) throws InterruptedException {
 		Thread.sleep(2000);
-		ot.signIn();
+		// ot.signIn();
 
 		ot.enterMobileNumber(mobnumber);
 	}
@@ -140,4 +144,121 @@ public class TestCaseStepDefination {
 		Assert.assertEquals(actualmail, expectedMailMsg);
 	}
 
+	@Then("User Click on My profile enter name {string} and email {string} then Click On Update")
+	public void user_click_on_my_profile_enter_name_and_email_then_click_on_update(String name, String emailId)
+			throws InterruptedException {
+		Thread.sleep(2000);
+		hp.enterName(name);
+		hp.enterEmailId(emailId);
+		hp.clickOnUpdate();
+
+	}
+
+	@When("User clicks on a {string} from the product list")
+	public void user_clicks_on_a_from_the_product_list(String productName) {
+		prod.clickOnProduct(productName);
+
+	}
+
+	@Then("User Click on Home Button")
+	public void userClickonHomeButton() {
+		prod.clickOnHomeButton();
+	}
+
+	@When("User Select Size as {string}")
+	public void user_select_size_as(String size) throws InterruptedException {
+		prod.clickOnSize(size);
+	}
+
+	@When("User Click on Order Now button")
+	public void user_click_on_order_now_button() throws InterruptedException {
+		prod.clickOnOrderButton();
+	}
+
+	@Given("User click on Buy Onces")
+	public void user_click_on_buy_onces() throws InterruptedException {
+		Thread.sleep(4000);
+		prod.clickOnPopUp();
+		
+		mod.clickonBuyOnces();
+	}
+
+	@Then("User Click on Add ItemButton")
+	public void user_click_on_add_item_button() throws InterruptedException {
+		mod.clickOnAddItem();
+		Thread.sleep(2000);
+		mod.closeOn();
+		mod.closeOn();
+		mod.closeOn();
+		mod.clickOnClose();
+	}
+
+	@Then("User modifies quantity of product in cart to two and Click on Edit item")
+	public void user_modifies_quantity_of_product_in_cart_to_two_and_click_on_edit_item() throws InterruptedException {
+		
+		cpage.clickOnAddToCart();
+		Thread.sleep(2000);
+		cpage.clickOnModify();
+		cpage.addQuantity();
+		cpage.clickOnEditItem();
+		
+	}
+
+	@Then("Product name and price in cart should match the selected product")
+	public void product_name_and_price_in_cart_should_match_the_selected_product() {
+		cpage.getProductname();
+		cpage.getPrice();
+	}
+	
+	@Then("User Enter Name {string} and Email id {string} and click on update")
+	public void user_enter_name_and_email_id_and_click_on_update(String username, String useremailId) throws InterruptedException {
+		Thread.sleep(2000);
+		hp.enterName(username);
+		hp.enterEmailId(useremailId);
+		hp.clickOnUpdate();
+	}
+	
+	
+	@Then("User Add Address {string} Landmark is {string}")
+	public void user_add_address_landmark_is(String address, String landMark) throws InterruptedException {
+		mod.addAddressInCart();
+		mod.enterAddressInAddAddress(address);
+		mod.enterlandMark(landMark);
+	
+	}
+	@Then("User Select tag Home and save")
+	public void user_select_tag_home_and_save() throws InterruptedException {
+		mod.clickOnHomeLabelButton();
+	}
+
+	@Then("User Click on ProductButton")
+	public void user_click_on_product_button() throws InterruptedException {
+		prod.clickOnProduct();
+	}
+
+	@When("User enter product as name of {string}")
+	public void user_enter_product_as_name_of(String productNAme) throws InterruptedException {
+		Thread.sleep(2000);
+		prod.enterProductName(productNAme);
+
+	}
+
+	@When("User Get all products related to ghee")
+	public void user_get_all_products_related_to_ghee() throws InterruptedException {
+		Thread.sleep(2000);
+		prod.getAllProductFromList();
+	}
+	
+	@When("User Click On {string} ane enter quantity 500ml")
+	public void user_click_on_ane_enter_quantity_500ml(String string) {
+		prod.getproductNameFromList(string);
+		
+	}
+	@Then("User click on Add Button and Click on Order Now")
+	public void user_click_on_add_button() throws InterruptedException {
+		prod.clickOnAdd();
+		prod.clickOnAddNow();
+	}
+
 }
+

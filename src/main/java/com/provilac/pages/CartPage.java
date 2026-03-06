@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.provilac.keyword.Keyword;
 import com.provilac.stepDefination.TestBase;
+import com.provilac.utilities.WaitUtil;
 
 public class CartPage {
 	Keyword keyword= new Keyword();
@@ -24,7 +25,7 @@ public class CartPage {
 	@FindBy(xpath = "(//button[text()='+'])[7]")
 	private WebElement addQun;
 	
-	public void addQuantity() {
+	public void addQuantity() throws InterruptedException {
 		keyword.clickOnWebElement(addQun);
 	}
 	
@@ -45,18 +46,54 @@ public class CartPage {
 		System.out.println("Product price in Add cart = "+pr);
 		return pr;
 	}
-	
-	@FindBy(xpath = "//a[@href=\"/cart\"]")
+		//"//a[@href=\"/cart\"]"
+	@FindBy(xpath ="(//button[text()='Add item'])[2]" )
 	private WebElement addTocart;
 	
-	public void clickOnAddToCart() {
-		addTocart.click();
+	public void clickOnAddToCart() throws InterruptedException {
+		keyword.clickOnWebElement(addTocart);
 	}
 	
 	@FindBy(xpath = "(//button[text()='Edit item'])[1]")
 	private WebElement editItem;
 	
-	public void clickOnEditItem() {
+	public void clickOnEditItem() throws InterruptedException {
 		keyword.clickOnWebElement(editItem);
 	}
+	
+	@FindBy(xpath = "(//button[text()='Subscribe'])[2]")
+	private WebElement subscribe;
+	
+	public void clickOnSubscribe() throws InterruptedException {
+		keyword.clickOnWebElement(subscribe);
+	}
+	
+	
+	@FindBy(xpath = "(//*[@id=\\\"modalModifier\\\"]/app-add-to-cart/div[1]/button/img)")
+	private WebElement close;
+	
+	public void clickOnClose() throws InterruptedException {
+		for (int i = 0; i < 3; i++) {
+		    keyword.clickOnWebElement(close);
+		    Thread.sleep(500); 
+		}
+	}
+	
+	
+	@FindBy(xpath = "//div[@id=\"navbarSupportedContent---\"]/following-sibling::ul/descendant::a[@href=\"/cart\"]")
+	private WebElement cart;
+	
+	public void addCart() {
+		cart.click();
+	}
+	
+	
+	@FindBy(xpath = "//button[text()='Continue Shopping']")
+	private WebElement continueShopping;
+	
+	public void clickOnContinueShopping() throws InterruptedException {
+		Thread.sleep(1000);
+		continueShopping.click();
+	}
+	
 }

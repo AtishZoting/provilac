@@ -1,6 +1,9 @@
 package com.provilac.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -20,8 +23,7 @@ public class HomePage {
 	@FindBy(xpath = "//a[text()='Pune']")
 	private WebElement dropDown;
 
-	public void clickOnDropDownPune() {
-		WaitUtil.elementToBeVisible(dropDown);
+	public void clickOnDropDownPune() throws InterruptedException {
 		dropDown.click();
 		
 	}
@@ -64,17 +66,19 @@ public class HomePage {
 	}
 	
 	@FindBy(xpath = "//input[@placeholder=\"Enter Name\"]")
-	private WebElement name;
+	private WebElement name1;
 	
 	public void enterName(String name) {
-		this.name.clear();
-		this.name.sendKeys(name);
+		//WaitUtil.waitForVisibility(By.xpath("//input[@placeholder=\"Enter Name\"]"));
+		this.name1.clear();
+		this.name1.sendKeys(name);
 	}
 	
 	@FindBy(xpath = "//input[@placeholder=\"Enter Email\"]")
 	private WebElement emailId;
 	
 	public void enterEmailId(String eid) {
+		//WaitUtil.waitForVisibility(By.xpath("//input[@placeholder=\"Enter Email\"]"));
 		emailId.clear();
 		emailId.sendKeys(eid);
 	}
@@ -109,6 +113,25 @@ public class HomePage {
 		WaitUtil.elementToBeVisible(mailIdMsg);
 		return mailIdMsg.getText();
 	}
+	
+	@FindBy(xpath = "//div[@id=\"navbarSupportedContent---\"]/descendant::a[text()='Home']")
+	private WebElement home;
+	
+	public String hom() {
+		return home.getText();
+	}
 
+	
+	@FindBy(xpath = "//button[@id=\"moe-dontallow_button\"]")
+	private WebElement dontallowpopup;
+	
+	public void clickOnDontAllowPopup() throws InterruptedException {
+		keyword.clickOnWebElement(dontallowpopup);
+		
+//		Actions action= new Actions(TestBase.driver);
+//		action.click(dontallowpopup);
+//		action.perform();
+		
+	}
 }
 	

@@ -1,6 +1,7 @@
 package com.provilac.stepDefination;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -38,13 +39,14 @@ public class TestBase {
 
 		driver.manage().window().maximize();
 		driver.get(con.getUrl());
+		driver.manage().timeouts().implicitlyWait(Duration.ofMinutes(1));
 	}
 
-	@After
-	public void tearDown(Scenario scenario) {
+	//@After
+	public void tearDown(Scenario scenario) throws IOException {
 		if(scenario.isFailed()) {
 			Keyword keyword= new Keyword();
-			keyword.captureScreenShot();
+			keyword.captureScreenShot("/src/main/resources/failedTestCasesScreenshots");
 		}
 		
 		driver.quit();

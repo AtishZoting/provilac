@@ -49,3 +49,9 @@ Feature: Customer Onboarding Flow - Provilac
     And User submits the profile
     Then User should see error messages for name " Please enter the full name. " and email " Please enter the email id. "
     
+    
+    
+    #  And click on Guest 
+  #  And click on login
+  #  And clicks on the Product
+   #    #And enter complete address "Flat no 302, shravi Empire" and landMark "Pimple Gurav" 

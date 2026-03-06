@@ -25,7 +25,8 @@ public class OtpPage {
 
 	@FindBy(xpath = "//a[text()='SIGN IN']")
 	 WebElement signIn;
-	public void signIn() {
+	public void signIn() throws InterruptedException {
+		Thread.sleep(2000);
 		WaitUtil.elementToBeClickable(signIn);
 			signIn.click();
 		
@@ -35,7 +36,6 @@ public class OtpPage {
 	private WebElement mobileNumber;
 	
 	public void enterMobileNumber(String mobnumber) throws InterruptedException {
-		Thread.sleep(2000);
 		mobileNumber.clear();
 		mobileNumber.sendKeys(mobnumber);
 	}
